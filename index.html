@@ -3,21 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,user-scalable=no" />
-    <title>3D Carousel</title>
+    <title>Play2Win</title>
     <style>
       * {
         margin: 0;
         padding: 0;
       }
-
-      video {
-  object-fit: cover;
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-}
 
       html,
       body {
@@ -31,14 +22,53 @@
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
-
+background: rgb(255,255,255);
+background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(194,249,255,1) 35%, rgba(50,155,187,1) 71%, rgba(10,0,78,1) 100%);
         -webkit-perspective: 1000px;
         perspective: 1000px;
         -webkit-transform-style: preserve-3d;
         transform-style: preserve-3d;
       }
+p{margin-top:25px;
+	position:absolute;
+	display:flex;
+justify-content: center;
+width:100vw;
+font-family: Tahoma, sans-serif;
+color:#ffffff;
+
+  -webkit-text-stroke-width: 1px;
+animation: blur .75s ease-out infinite;
+  text-shadow: 0px 0px 5px #fff, 0px 0px 7px #000;
+
+padding-bottom:35px;
+
+	font-size:70px;
+}
 
 
+@keyframes blur {
+  from {
+    text-shadow:0px 0px 10px #fff,
+      0px 0px 10px #fff, 
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 25px #fff,
+      0px 0px 50px #fff,
+      0px 0px 50px #fff,
+      0px 0px 50px #ffcec6,
+      0px 0px 150px #7B96B8,
+      0px 10px 100px #7B96B8,
+      0px 10px 100px #ffcec6,
+      0px 10px 100px #7B96B8,
+      0px 10px 100px #7B96B8,
+      0px -10px 100px #7B96B8,
+      0px -10px 100px #ffcec6;
+  }
+}
       #drag-container,
       #spin-container {
         position: relative;
@@ -155,33 +185,46 @@
   </head>
 
   <body>
-  	<video playsinline autoplay muted loop poster="polina.jpg" id="bgvid">
-  <source src="polina.webm" type="video/webm">
-  <source src="polina.mp4" type="video/mp4">
-</video>
+<div class="border">
+  			<p><b>PLAY2WIN</b></p>
+</div>
+
     <div id="drag-container">
       <div id="spin-container">
-        <!-- Add your images (or video) here -->
+<a href="cashinaflash.html">
         <img
           src="images/cashinaflash.png"
           alt=""
         />
+      </a>
+
+      <a href="etherealearnings.html">
         <img
           src="images/etherealearnings.png"
           alt=""
         />
+      </a>
+
+            <a href="frostbitefrenzy.html">
         <img
           src="images/frostbitefrenzy.png"
           alt=""
         />
+      </a>
+
+      <a href="hotstreak.html">
         <img
           src="images/hotstreak.png"
           alt=""
         />
+      </a>
+
+      <a href="luckylovers.html">
         <img
           src="images/luckylovers.png"
           alt=""
         />
+      </a>
        
       
 
