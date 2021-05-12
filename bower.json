@@ -1,21 +1,33 @@
 {
-  "name": "particles.js",
-  "main": "particles.js",
-  "homepage": "https://github.com/VincentGarreau/particles.js",
+  "name": "real-shadow",
+  "version": "1.4.1",
+  "homepage": "http://indamix.github.io/real-shadow",
   "authors": [
-    "Vincent Garreau <vin.garreau@gmail.com>"
+    {
+      "name": "Indamix",
+      "homepage": "https://indamix.github.io"
+    }
   ],
-  "description": "A lightweight JavaScript library for creating particles.",
+  "description": "Real Shadow: Photorealistic Shadows of any shape",
+  "main": "realshadow.js",
   "keywords": [
-    "particle",
-    "particles"
+    "shadow",
+    "real shadow",
+    "jquery",
+    "plugin",
+    "shadows",
+    "shadow custom shape",
+    "css",
+    "css3"
   ],
   "license": "MIT",
   "ignore": [
-    "**/.*",
+    ".gitignore",
+    "i",
     "node_modules",
     "bower_components",
-    "test",
-    "tests"
+    "demo.js",
+    "index.html",
+    "main.css"
   ]
 }

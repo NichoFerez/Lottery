@@ -4,6 +4,21 @@
 
 
 	<style>
+    
+      .home{
+    font-family: Tahoma, sans-serif;
+    width:100vw;
+    display:flex;
+    align-items:start;
+    padding-top:30px;
+    padding-left:30px;
+position:absolute;
+z-index:1;
+  }
+  .home a{
+    text-decoration:none;
+    color:white;
+  }
  #myVideo {
   position: fixed;
   right: 0;
@@ -43,14 +58,19 @@ width:532px;
 	</head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<body>
+    <div class="home">
+      <a href="index.html"><h1>Menu</h1></a>
+    </div>
     <video autoplay muted loop id="myVideo">
   <source src="images/video.mp4" type="video/mp4">
 </video>
+
 		<div id="container">
 			<div id="inner">
 		<img src="images/etherealearnings2.png">
 	</div>
 	</div>
+  <canvas id='canvas'></canvas>
 	</body>
   <script>
     $('body').ripples({

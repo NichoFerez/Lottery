@@ -2,6 +2,18 @@
 <html>
 <head>
 	<style>
+		body{
+			 background:url(https://pixabay.com/static/uploads/photo/2015/03/03/01/51/lava-656827_960_720.jpg);
+  background-size:cover;
+  position:fixed;
+
+		}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
 	#container{
 		margin-top:-90px;
 display:flex;
@@ -10,7 +22,24 @@ height:100vh;
 
 justify-content:center;
 align-items:center;
+z-index:absolute;
+z-index:3;
   perspective: 25px;
+	}
+	.home{
+		font-family: Tahoma, sans-serif;
+		width:100vw;
+		display:flex;
+		align-items:start;
+		padding-top:10px;
+		padding-left:30px;
+		position:absolute;
+		z-index:2;
+
+	}
+	.home a{
+		text-decoration:none;
+		color:white;
 	}
 	#inner{
 
@@ -30,12 +59,22 @@ width:350px;
 	</style>
 	</head>
 	<body>
+		<div class="home">
+			<a href="index.html"><h1>Menu</h1></a>
+		</div>
+		
 		<div id="container">
 			<div id="inner">
 		<img src="images/hotstreak.png">
 	</div>
 	</div>
+<div id="canvascontainer">
+  <canvas id="buffer"></canvas>
+  <canvas id="canvas"></canvas>
+</div>
+
 	</body>
+	
 	<script>
 		(function() {
   // Init
