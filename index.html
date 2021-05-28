@@ -12,7 +12,72 @@
 
     <title>Play2Win</title>
     <style>
+.angelnumber{
+    position: absolute;
+      font-family: 'Lemon';font-size: 30px;
+      right: 110px;
+      text-align: center;
+       -webkit-text-stroke-width: 1px;
+top: 14%;
+  text-shadow: 5px 5px 1px #000, 0px 0px 5px #000;
+  color: #ffffff;
+}
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap');
+
+ circle text{
+    display: none;
+ }
+
+text{
+      font-family: 'Lemon';font-size: 90px;
+        font-size:20px;
+
+        pointer-events:none;
+
+    }
+
+
+    #chart{
+        position:absolute;
+        width:400px;
+        height:400px;
+        top:47%;
+z-index: 4;
+        right:30px;
+
+    }
+    #question{
+        position: absolute;
+        width:100vw;
+        height:100vh;
+        top:0;
+z-index: -3;
+
+        font-family: 'Quicksand', sans-serif ;
+        right: 0;
+    }
+    #question h1{
+        font-size: 20px;
+        font-weight: bold;
+        font-family: 'Quicksand', sans-serif ;
+        position: absolute;
+        padding: 0;
+        margin: 0;
+     right: 85px;
+        top:26%;
+        
+        background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%),
+                radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
+        height: 170px;
+         width:330px;
+        padding: 10px;
+        border-radius: 3px;
+        color: black;
+
+         
+    }
+
+
 
 body {
 padding: 0;
@@ -148,7 +213,7 @@ html *::after {
 
 .player {
 position:absolute;
-top:15%;
+top:18%;
 z-index: 3;
 left:70px;
     width: 17.15em ;
@@ -662,7 +727,163 @@ color:#ffffff;
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   <body>
-   
+
+    <div class="angelnumber">
+   <p>What are your<br> angel numbers?</p>
+</div>
+<div id="chart"></div>
+    <div id="question"><h1></h1></div>
+    
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+    <script>
+        var padding = {top:20, right:40, bottom:0, left:0},
+            w = 400 - padding.left - padding.right,
+            h = 400 - padding.top  - padding.bottom,
+            r = Math.min(w, h)/2,
+            rotation = 0,
+            oldrotation = 0,
+            picked = 100000,
+            oldpick = [],
+            color = d3.scale.category20();//category20c()
+            //randomNumbers = getRandomNumbers();
+        //http://osric.com/bingo-card-generator/?title=HTML+and+CSS+BINGO!&words=padding%2Cfont-family%2Ccolor%2Cfont-weight%2Cfont-size%2Cbackground-color%2Cnesting%2Cbottom%2Csans-serif%2Cperiod%2Cpound+sign%2C%EF%B9%A4body%EF%B9%A5%2C%EF%B9%A4ul%EF%B9%A5%2C%EF%B9%A4h1%EF%B9%A5%2Cmargin%2C%3C++%3E%2C{+}%2C%EF%B9%A4p%EF%B9%A5%2C%EF%B9%A4!DOCTYPE+html%EF%B9%A5%2C%EF%B9%A4head%EF%B9%A5%2Ccolon%2C%EF%B9%A4style%EF%B9%A5%2C.html%2CHTML%2CCSS%2CJavaScript%2Cborder&freespace=true&freespaceValue=Web+Design+Master&freespaceRandom=false&width=5&height=5&number=35#results
+        var data = [
+                    {"label":"111",  "value":1,  "question":"Your intentions are manifesting quickly! Make sure you're focusing on what you actually want."}, // padding
+                    {"label":"222",  "value":2,  "question":"Stop worrying. Everything is working out just as it's supposed to."}, //font-family
+                    {"label":"333",  "value":3,  "question":"The ascended masters are right by you, assisting you with whatever it is that you're currently working on. You're in good hands!"}, //color
+                    {"label":"444",  "value":4,  "question":"You are completely surrounded by angels. You are being guided through whatever you're focusing on."}, //font-weight
+                    {"label":"555",  "value":5,  "question":"HUGE changes are up ahead. Trust that this transition is your highest good. Prepare for massive shifts! Things are getting exciting!"}, //font-size
+                    {"label":"666",  "value":6,  "question":"Your thoughts need some refocusing. This is a reminder that you are a spiritual being having a human experience. Reconnect with your spirituality."}, //background-color
+                    {"label":"777",  "value":7,  "question":"Luck is on your side. You are on the ultimate spiritual path. Keep doing what you are doing!"}, //nesting
+                    {"label":"888",  "value":8,  "question":"Lots of money! Financial abundance is on its way to you right now. You are aligned with the money you desire."}, //bottom
+                    {"label":"999",  "value":9,  "question":"You are being nudged to finish something because that completion will unlock the next step for you."}, //sans-serif
+                    {"label":"000", "value":10, "question":"New beginnings. A fresh start. Being one with the unverse. A reminder that you are the creator of your own destiny."}
+        ];
+        var svg = d3.select('#chart')
+            .append("svg")
+            .data([data])
+            .attr("width",  w + padding.left + padding.right)
+            .attr("height", h + padding.top + padding.bottom);
+        var container = svg.append("g")
+            .attr("class", "chartholder")
+            .attr("transform", "translate(" + (w/2 + padding.left) + "," + (h/2 + padding.top) + ")");
+        var vis = container
+            .append("g");
+            
+        var pie = d3.layout.pie().sort(null).value(function(d){return 1;});
+        // declare an arc generator function
+        var arc = d3.svg.arc().outerRadius(r);
+        // select paths, use arc generator to draw
+        var arcs = vis.selectAll("g.slice")
+            .data(pie)
+            .enter()
+            .append("g")
+            .attr("class", "slice");
+            
+        arcs.append("path")
+            .attr("fill", function(d, i){ return color(i); })
+            .attr("d", function (d) { return arc(d); });
+        // add the text
+        arcs.append("text").attr("transform", function(d){
+                d.innerRadius = 0;
+                d.outerRadius = r;
+                d.angle = (d.startAngle + d.endAngle)/2;
+                return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")translate(" + (d.outerRadius -10) +")";
+            })
+            .attr("text-anchor", "end")
+            .text( function(d, i) {
+                return data[i].label;
+            });
+        container.on("click", spin);
+        function spin(d){
+            
+            container.on("click", null);
+            //all slices have been seen, all done
+            console.log("OldPick: " + oldpick.length, "Data length: " + data.length);
+            if(oldpick.length == data.length){
+                console.log("done");
+                container.on("click", null);
+                return;
+            }
+            var  ps       = 360/data.length,
+                 pieslice = Math.round(1440/data.length),
+                 rng      = Math.floor((Math.random() * 1440) + 360);
+                
+            rotation = (Math.round(rng / ps) * ps);
+            
+            picked = Math.round(data.length - (rotation % 360)/ps);
+            picked = picked >= data.length ? (picked % data.length) : picked;
+            if(oldpick.indexOf(picked) !== -1){
+                d3.select(this).call(spin);
+                return;
+            } else {
+                oldpick.push(picked);
+            }
+            rotation += 90 - Math.round(ps/2);
+            vis.transition()
+                .duration(3000)
+                .attrTween("transform", rotTween)
+                .each("end", function(){
+                    //mark question as seen
+                    d3.select(".slice:nth-child(" + (picked + 1) + ") path")
+                        .attr("fill", "#111");
+                    //populate question
+                    d3.select("#question h1")
+                        .text(data[picked].question);
+                    oldrotation = rotation;
+              
+                    /* Get the result value from object "data" */
+                    console.log(data[picked].value)
+              
+                    /* Comment the below line for restrict spin to sngle time */
+                    container.on("click", spin);
+                });
+        }
+        //make arrow
+        svg.append("g")
+            .attr("transform", "translate(" + (w + padding.left + padding.right) + "," + ((h/2)+padding.top) + ")")
+            .append("path")
+            .attr("d", "M-" + (r*.15) + ",0L0," + (r*.05) + "L0,-" + (r*.05) + "Z")
+            .style({"fill":"black"});
+        //draw spin circle
+        container.append("circle")
+            .attr("cx", 0)
+            .attr("cy", 0)
+            .attr("r", 60)
+            .style({"fill":"white","cursor":"pointer"});
+        //spin text
+        container.append("text")
+            .attr("x", 0)
+            .attr("y", 10)
+            .attr("text-anchor", "middle")
+            .text("SPIN")
+            .style({"font-weight":"bold", "font-size":"30px"});
+        
+        
+        function rotTween(to) {
+          var i = d3.interpolate(oldrotation % 360, rotation);
+          return function(t) {
+            return "rotate(" + i(t) + ")";
+          };
+        }
+        
+        
+        function getRandomNumbers(){
+            var array = new Uint16Array(1000);
+            var scale = d3.scale.linear().range([360, 1440]).domain([0, 100000]);
+            if(window.hasOwnProperty("crypto") && typeof window.crypto.getRandomValues === "function"){
+                window.crypto.getRandomValues(array);
+                console.log("works");
+            } else {
+                //no support for crypto, get crappy random numbers
+                for(var i=0; i < 1000; i++){
+                    array[i] = Math.floor(Math.random() * 100000) + 1;
+                }
+            }
+            return array;
+        }</script>
+
 <div class="player">
 
     <div class="player__header">
@@ -877,6 +1098,8 @@ color:#ffffff;
 <div class="border">
   			<p><b>PLAY2WIN</b></p>
 </div>
+
+
 
     <div id="drag-container">
       <div id="spin-container">
