@@ -17,21 +17,6 @@
 
 
 
-.angelnumber{
-    position: absolute;
-      font-family: 'Lemon', sans-serif;
-      font-size: 30px;
-      right: 122px;
- -webkit-text-stroke-width: 1px;
-
-  text-shadow: 3px 3px 1px #000, 0px 0px 5px #000;
-
-      text-align: center;
-      
-top: 17%;
-
-  color: #ffffff;
-}
 
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap');
 
@@ -49,21 +34,23 @@ text{
         position:absolute;
         width:400px;
         height:400px;
-        top:28%;
+        top:27%;
 z-index: 4;
+
         right:30px;
 
     }
     #question{
         position: absolute;
         width:330px;
-        height:100vh;
-        top:0;
-z-index: -3;
+        height:100px;
+                top:73%;
+
+z-index: 4;
      
 
  font-family: 'Tangerine', cursive;
-        right: 0;
+     right: 5%;
     }
     
     #question h1{
@@ -76,8 +63,8 @@ z-index: -3;
         position: absolute;
       padding: 15px;
         margin: 0;
-     right: 23%;
-        top:73%;
+
+
 text-shadow: 1px 1px 1px #000, 0px 0px 5px #000;
         height: 150px;
          width:330px;
@@ -88,7 +75,11 @@ text-shadow: 1px 1px 1px #000, 0px 0px 5px #000;
          
     }
 
-
+@media screen and (min-height: 970px) {
+    #question{
+     top:70%;
+    }
+}
 
 body {
 padding: 0;
@@ -740,9 +731,7 @@ color:#ffffff;
 
   <body>
 
-    <div class="angelnumber">
-   <p>Find your<br> angel number</p>
-</div>
+ 
 <div id="chart"></div>
     <div id="question"><h1></h1></div>
     
